@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <title>String invertida</title>
+</head>
+<body>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+       Clique e inverta sua String
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Inverção de String</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="stringOriginal" class="col-form-label">Escreva uma palavra ou frase que desejar:</label>
+                            <textarea class="form-control" id="stringOriginal"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="inverterString()">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalFibonacci">
+        Clique para ver se o número faz parte da sequência de Fibonacci
+    </button>
+    <div class="modal fade" id="exampleModalFibonacci" tabindex="-1" aria-labelledby="exampleModalFibonacciLabel" aria-hidden="true">
+         <div class="modal-dialog">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h1 class="modal-title fs-5" id="exampleModalFibonacciLabel">Sequência de Fibonacci</h1>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                     <form>
+                         <div class="mb-3">
+                             <label for="fibonacci" class="col-form-label">Digite um número:</label>
+                             <input type="number" class="form-control" id="fibonacci" />
+                         </div>
+                     </form>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                     <button type="button" class="btn btn-primary" onclick="fibonacci()">Enviar</button>
+                 </div>
+             </div>
+         </div>
+    </div>
+    <div id="resultado" class="mt-3"></div>
+    <div id="resultadoFibonacci" class="mt-3"></div>
+    <div id="resultadoSoma" class="mt-3"></div>
+
+    <script>
+
+    function inverterString() {
+            const stringOriginal = document.getElementById('stringOriginal').value;
+            let resultado = '';
+
+            for (let i = stringOriginal.length - 1; i >= 0; i--) {
+                resultado += stringOriginal[i];
+            }
+
+            const stringInvertida = document.getElementById('resultado');
+            stringInvertida.textContent = 'String Invertida: ' + resultado;
+            const modalElement = document.getElementById('exampleModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide();
+        }
+
+    function fibonacci() {
+        const fibonacciInput = document.getElementById('fibonacci').value;
+        const fibonacciNumber = parseInt(fibonacciInput, 10);
+
+        if (isNaN(fibonacciNumber) || fibonacciNumber < 0) {
+            alert("Por favor, insira um número válido.");
+            return;
+        }
+
+        let numero1 = 0;
+        let numero2 = 1;
+        let resultadoFi = '';
+
+        if (fibonacciNumber === 0 || fibonacciNumber === 1) {
+            resultadoFi = `O número ${fibonacciNumber} faz parte da sequência de Fibonacci.`;
+        } else {
+            while (numero2 < fibonacciNumber) {
+                const numSequencia = numero1 + numero2;
+                numero1 = numero2;
+                numero2 = numSequencia;
+            }
+
+            if (numero2 === fibonacciNumber) {
+                resultadoFi = `O número ${fibonacciNumber} faz parte da sequência de Fibonacci.`;
+            } else {
+                resultadoFi = `O número ${fibonacciNumber} não faz parte da sequência de Fibonacci.`;
+            }
+        }
+
+        // Atualizar o conteúdo do resultado
+        const sequencia = document.getElementById('resultadoFibonacci');
+        sequencia.textContent = resultadoFi;
+
+        // Fechar o modal
+        const modalElement = document.getElementById('exampleModalFibonacci');
+        const modal = bootstrap.Modal.getInstance(modalElement);
+        modal.hide();
+    }
+
+    function soma() {
+            let indice = 13;
+            let soma = 0;
+
+            for (let k = 1; k <= indice; k++) {
+                soma += k;
+            }
+
+            // Verifique o valor de soma no console para depuração
+            console.log(`A resposta do exercício de soma é: ${soma}`);
+            
+            const respostaSoma = document.getElementById('resultadoSoma');
+            respostaSoma.textContent = `A resposta do exercício de soma é: ${soma}`;
+        }
+
+        // Executa a função soma após o DOM estar carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            soma();
+        });
+</script>
+</body>
+</html>
