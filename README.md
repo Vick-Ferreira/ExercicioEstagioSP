@@ -9,6 +9,6 @@ Este projeto inclui uma série de exercícios desenvolvidos utilizando JavaScrip
 
 Para testar a aplicação localmente, siga os seguintes passos:
 
-1. **Pasta principal:**
+1. **Na pasta principal, de o comando:**
    node index.js
   
